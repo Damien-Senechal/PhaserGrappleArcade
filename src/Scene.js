@@ -70,7 +70,6 @@ class Scene extends Phaser.Scene {
     }
 
     fireHook(e) {
-        releaseHook()
         let angle = Phaser.Math.Angle.Between(this.hero.body.x, this.hero.body.y, e.position.x, e.position.y);
         this.hook = this.add.rectangle(this.hero.body.x + (20 * 2) * Math.cos(angle), this.hero.body.y + (20 * 2) * Math.sin(angle), 10, 10);
         this.physics.add.existing(this.hook);

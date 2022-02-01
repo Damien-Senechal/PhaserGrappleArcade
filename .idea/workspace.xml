@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a5cfc72-c400-4160-885e-d8cb834bdf4a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/phaser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scene.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phaser.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,11 +33,15 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="24Vttjb8XJqNvGoiSjbz7WAllmT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -52,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1643727800247</updated>
       <workItem from="1643727801935" duration="13000" />
-      <workItem from="1643727855746" duration="15151000" />
+      <workItem from="1643727855746" duration="15789000" />
     </task>
     <servers />
   </component>
@@ -69,5 +77,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
