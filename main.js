@@ -7,13 +7,7 @@ var config = {
         arcade: {
             gravity: { y: 200 },
             debug : true,
-            fps : 60,
-            terrainObjects: 20,     // amount of terrain objects
-            heroSize: 20,           // hero size
-            constraintSpeed: 2,     // constraint shrinkage speed
-            minBoxSize: 50,         // minimum box size
-            maxBoxSize: 200,        // maximum box size
-            hookSpeed: 20
+            fps : 60
         }
     },
     scene: {
@@ -37,6 +31,13 @@ function preload ()
 function create () {
     this.physics.world.setBounds(10, 10, game.config.width - 20, game.config.height - 20,);
 
+    this.boxes = this.physics.add.group({
+        collideWorldBounds: true,
+        allowGravity : false,
+        immovable : true,
+        onCollide : true
+    })
+
     this.hero = this.add.rectangle(game.config.width / 2, game.config.height / 2, 20, 20, 0x6666ff);
     this.physics.add.existing(this.hero);
     this.hero.body.collideWorldBounds = true;
@@ -50,50 +51,48 @@ function create () {
         let width = Phaser.Math.Between(50, 200);
         let height = Phaser.Math.Between(50, 200);
         let rect = this.add.rectangle(posX, posY, width, height, 0x6666ff, {isStatic: true});
-        this.physics.add.existing(rect);
-        rect.body.collideWorldBounds = true;
-        rect.body.setAllowGravity(false);
-        rect.body.setImmovable(true);
-        this.physics.add.collider(this.hero, rect)
         rect.label = WALL;
-        rect.body.onCollide = true
+        this.boxes.add(rect)
     }
+    this.physics.add.collider(this.hero, this.boxes)
 
     this.hook = null
     this.rope = null;
 
     this.input.on("pointerdown", fireHook, this);
+    let me = this;
+    this.physics.world.on('collide', function(gameObject1, gameObject2, body1, body2) {
+        console.log(body1)
 
-    this.physics.world.on('collide', function(b1, b2) {
-        ///console.log("Hello")
-        // when the ball collides with something, we'll remove the hook
-        if (b1.label === BALL || b2.label === BALL) {
+        /*if(body1.height===20 || body2.height===20){
             console.log("Hello")
-            //this.releaseHook();
         }
 
-        if ((b1.label === HOOK || b2.label === HOOK) && !this.rope) {
-
-            // make the hook static
-            Phaser.Physics.Matter.Matter.Body.setStatic(this.hook, true);
+        if(body1.height===10 || body2.height===10){
+            console.log("BAM")
+            me.physics.body.setImmovable(true)
 
             // calculate the distance between the ball and the hook
             let distance = Phaser.Math.Distance.Between(this.hero.position.x, this.hero.position.y, this.hook.position.x, this.hook.position.y);
 
             // is the distance fairly greater than hero size?
-            if (distance > gameOptions.heroSize * 2) {
+            if(distance > gameOptions.heroSize * 2){
 
                 // add the constraint
-                this.rope = this.physics.add.constraint(this.hero, this.hook, distance, 0);
+                this.rope = this.matter.add.constraint(this.hero, this.hook, distance, 0);
             }
+        }*/
 
-        }
     }, this)
 }
 
 function fireHook(e){
     let angle = Phaser.Math.Angle.Between(this.hero.body.x, this.hero.body.y, e.position.x, e.position.y);
-    this.physics.add.constraint(this.hero, this.hook, 0, 0);
+    this.hook = this.add.rectangle(this.hero.body.x + (20 * 2) * Math.cos(angle), this.hero.body.y + (20 * 2) * Math.sin(angle), 10, 10);
+    this.hook.label = HOOK;
+    this.physics.add.existing(this.hook);
+    this.hook.body.setVelocity(400 * Math.cos(angle), 400 * Math.sin(angle))
+    this.physics.add.collider(this.hook, this.boxes)
 }
 
 function update(){
