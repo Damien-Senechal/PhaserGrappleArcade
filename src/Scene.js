@@ -38,7 +38,7 @@ class Scene extends Phaser.Scene {
         this.hook = null;
         this.rope = null;
 
-        this.input.on("pointerdown", fireHook, this);
+        this.input.on("pointerdown", this.fireHook, this);
         let me = this;
         this.physics.world.on('collide', function (g1, g2, b1, b2) {
 
@@ -66,10 +66,10 @@ class Scene extends Phaser.Scene {
             }
 
         }, this)
-        console.log(this.hook)
     }
 
     fireHook(e) {
+        this.releaseHook()
         let angle = Phaser.Math.Angle.Between(this.hero.body.x, this.hero.body.y, e.position.x, e.position.y);
         this.hook = this.add.rectangle(this.hero.body.x + (20 * 2) * Math.cos(angle), this.hero.body.y + (20 * 2) * Math.sin(angle), 10, 10);
         this.physics.add.existing(this.hook);
@@ -80,7 +80,7 @@ class Scene extends Phaser.Scene {
 
     }
 
-    releaseHook(e) {
+    releaseHook() {
     }
 
     update() {
