@@ -54,7 +54,7 @@ class Scene extends Phaser.Scene {
 
                 // calculate the distance between the ball and the hook
                 let distance = Phaser.Math.Distance.Between(this.hero.body.x, this.hero.body.y, this.hook.body.x, this.hook.body.y);
-                console.log(distance)
+                //console.log(distance)
 
                 me.rope = true
                 // is the distance fairly greater than hero size?
@@ -82,6 +82,9 @@ class Scene extends Phaser.Scene {
     }
 
     releaseHook() {
+        if(this.hook != null){
+            this.hook.destroy();
+        }
     }
 
     update() {
