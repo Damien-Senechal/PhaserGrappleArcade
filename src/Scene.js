@@ -43,7 +43,7 @@ class Scene extends Phaser.Scene {
         this.physics.world.on('collide', function (g1, g2, b1, b2) {
 
             if (b1.height === 20 || b2.height === 20) {
-                //console.log("Hello")
+                console.log("Hello")
             }
 
             if (b1.height === 10 || b2.height === 10) {
@@ -54,6 +54,7 @@ class Scene extends Phaser.Scene {
 
                 // calculate the distance between the ball and the hook
                 let distance = Phaser.Math.Distance.Between(this.hero.body.x, this.hero.body.y, this.hook.body.x, this.hook.body.y);
+                console.log(distance)
 
                 me.rope = true
                 // is the distance fairly greater than hero size?
