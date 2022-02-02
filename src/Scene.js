@@ -37,7 +37,7 @@ class Scene extends Phaser.Scene {
         rect.label = this.WALL;
         this.boxes.add(rect)
 
-        let rect2 = this.add.rectangle(0, 0, 300, 100, 0x6666ff, {isStatic: true});
+        let rect2 = this.add.rectangle(0, 0, 800, 100, 0x6666ff, {isStatic: true});
         rect2.label = this.WALL;
         this.boxes.add(rect2)
 
@@ -93,6 +93,15 @@ class Scene extends Phaser.Scene {
             }
 
         }, this)
+
+        this.input.keyboard.on('keydown-A', function () {
+            if(me.grappling===false){
+                me.hero.body.setAllowGravity(true)
+            }
+        });
+        this.input.keyboard.on('keydown-D', function () {
+            me.hero.body.setVelocitX(1,0)
+        });
     }
 
     fireHook(e) {
@@ -121,14 +130,18 @@ class Scene extends Phaser.Scene {
             this.distance2 = 0;
         }
 
-        if(this.distance2 < 100 && this.grappling){
-            /*this.hero.body.setVelocityY(0)
+        /*if(this.grappling && this.distance2 < 20) {
+            this.hero.body.setVelocityY(0)
             this.hero.body.setVelocityX(0)
-            if(this.hero.body.x === this.hook.body.x){
-                this.hero.body.setAllowGravity(0)
-            }*/
+            this.hero.body.setAllowGravity(false)
+            this.grappling = false
+        }*/
+        if(this.hero.body.velocity.y >= 0 && this.grappling){
+            this.hero.body.setVelocityY(0)
+            this.hero.body.setVelocityX(0)
+            this.hero.body.setAllowGravity(false)
             this.grappling = false
         }
-        console.log(this.distance2);
+        //console.log(this.hero.body.velocity.y);
     }
 }
