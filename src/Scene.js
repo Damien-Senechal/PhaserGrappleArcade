@@ -7,6 +7,7 @@ class Scene extends Phaser.Scene {
     }
 
     create() {
+
         this.physics.world.setBounds(10, 10, game.config.width - 20, game.config.height - 20,);
 
         this.boxes = this.physics.add.group({
@@ -55,15 +56,18 @@ class Scene extends Phaser.Scene {
                 // calculate the distance between the ball and the hook
                 let distance = Phaser.Math.Distance.Between(this.hero.body.x, this.hero.body.y, this.hook.body.x, this.hook.body.y);
                 //console.log(distance)
+                let target = new Phaser.Math.Vector2();
+                target.x = this.hook.body.x
+                target.y = this.hook.body.y
 
-                me.rope = true
                 // is the distance fairly greater than hero size?
-                /*if(distance > 20 * 2){
+                if(distance > 20 * 2){
 
+                    this.physics.moveToObject(this.hero, target, 400);
                     // add the constraint
-                    this.rope.matter.add.constraint(this.hero, this.hook, distance, 0);
-                    this.rope = Phaser.Math.Distance.Between(this.hero.body.x, this.hero.body.y, this.hook.body.x, this.hook.body.y) < distance
-                }*/
+                    //this.rope.matter.add.constraint(this.hero, this.hook, distance, 0);
+                    //this.rope = Phaser.Math.Distance.Between(this.hero.body.x, this.hero.body.y, this.hook.body.x, this.hook.body.y) < distance
+                }
             }
 
         }, this)
@@ -78,7 +82,6 @@ class Scene extends Phaser.Scene {
         this.hook.label = this.HOOK;
         this.physics.add.collider(this.hook, this.boxes)
         this.hook.body.onCollide = true;
-
     }
 
     releaseHook() {
@@ -88,5 +91,6 @@ class Scene extends Phaser.Scene {
     }
 
     update() {
+
     }
 }
