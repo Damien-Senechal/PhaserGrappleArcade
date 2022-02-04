@@ -17,10 +17,10 @@ class Scene extends Phaser.Scene {
             onCollide: true
         })
 
-        this.hero = this.add.rectangle(game.config.width / 2, game.config.height / 2, 20, 20, 0x6666ff);
+        this.hero = this.add.rectangle(100, 400, 20, 20, 0x6666ff);
         this.physics.add.existing(this.hero);
         this.hero.body.collideWorldBounds = true;
-        this.hero.body.setBounce(0.5);
+        this.hero.body.setBounce(0);
         this.hero.label = this.BALL;
         this.hero.body.onCollide = true
 
@@ -33,13 +33,18 @@ class Scene extends Phaser.Scene {
             rect.label = this.WALL;
             this.boxes.add(rect)
         }*/
-        let rect = this.add.rectangle(800, 800, 800, 100, 0x6666ff, {isStatic: true});
+        let rect = this.add.rectangle(0, 800, 200, 100, 0x6666ff, {isStatic: true}).setOrigin(0,0);
         rect.label = this.WALL;
-        this.boxes.add(rect)
+        this.boxes.add(rect);
+        let rect3 = this.add.rectangle(600, 800, 200, 100, 0x6666ff, {isStatic: true}).setOrigin(0,0);
+        rect.label = this.WALL;
+        this.boxes.add(rect3);
 
-        let rect2 = this.add.rectangle(0, 0, 800, 100, 0x6666ff, {isStatic: true});
+        let rect2 = this.add.rectangle(400, 0, 400, 100, 0x6666ff, {isStatic: true});
         rect2.label = this.WALL;
         this.boxes.add(rect2)
+
+
 
         this.physics.add.collider(this.hero, this.boxes)
 
@@ -79,7 +84,7 @@ class Scene extends Phaser.Scene {
                 target.y = this.hook.body.y
 
                 this.grappling = true;
-                this.physics.moveToObject(this.hero, target, 400);
+                this.physics.moveToObject(this.hero, target, 500);
 
                 // is the distance fairly greater than hero size?
                 /*if(distance < 20){
@@ -100,7 +105,16 @@ class Scene extends Phaser.Scene {
             }
         });
         this.input.keyboard.on('keydown-D', function () {
-            me.hero.body.setVelocitX(1,0)
+            me.hero.body.setVelocityX(100)
+        });
+        this.input.keyboard.on('keydown-Q', function () {
+            me.hero.body.setVelocityX(-100)
+        });
+        this.input.keyboard.on('keyup-D', function () {
+            me.hero.body.setVelocityX(0)
+        });
+        this.input.keyboard.on('keyup-Q', function () {
+            me.hero.body.setVelocityX(0)
         });
     }
 
