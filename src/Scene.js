@@ -4,6 +4,7 @@ class Scene extends Phaser.Scene {
     HOOK;
 
     preload() {
+        this.load.spritesheet('hero', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
     create() {
@@ -20,7 +21,7 @@ class Scene extends Phaser.Scene {
         this.hero = this.add.rectangle(100, 400, 20, 20, 0x6666ff);
         this.physics.add.existing(this.hero);
         this.hero.body.collideWorldBounds = true;
-        this.hero.body.setBounce(0);
+        this.hero.body.setBounce(0.2);
         this.hero.label = this.BALL;
         this.hero.body.onCollide = true
 
@@ -98,24 +99,6 @@ class Scene extends Phaser.Scene {
             }
 
         }, this)
-
-        this.input.keyboard.on('keydown-A', function () {
-            if(me.grappling===false){
-                me.hero.body.setAllowGravity(true)
-            }
-        });
-        this.input.keyboard.on('keydown-D', function () {
-            me.hero.body.setVelocityX(100)
-        });
-        this.input.keyboard.on('keydown-Q', function () {
-            me.hero.body.setVelocityX(-100)
-        });
-        this.input.keyboard.on('keyup-D', function () {
-            me.hero.body.setVelocityX(0)
-        });
-        this.input.keyboard.on('keyup-Q', function () {
-            me.hero.body.setVelocityX(0)
-        });
     }
 
     fireHook(e) {
