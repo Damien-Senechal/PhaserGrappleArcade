@@ -4,7 +4,7 @@ class Scene extends Phaser.Scene {
     HOOK;
 
     preload() {
-        this.load.spritesheet('hero', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('hero', 'assets//Kings and Pigs/Sprites/01-King Human/Idle (78x58).png', { frameWidth: 78, frameHeight: 58 });
     }
 
     create() {
@@ -18,12 +18,14 @@ class Scene extends Phaser.Scene {
             onCollide: true
         })
 
-        this.hero = this.add.rectangle(100, 400, 20, 20, 0x6666ff);
+        this.hero = new Hero(this, 100, 400);
+
+        /*this.hero = this.add.rectangle(100, 400, 20, 20, 0x6666ff);
         this.physics.add.existing(this.hero);
         this.hero.body.collideWorldBounds = true;
         this.hero.body.setBounce(0.2);
         this.hero.label = this.BALL;
-        this.hero.body.onCollide = true
+        this.hero.body.onCollide = true*/
 
         /*for (let i = 0; i <= 15; i++) {
             let posX = Phaser.Math.Between(0, game.config.width);

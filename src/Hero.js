@@ -11,7 +11,7 @@ class Hero extends Phaser.Physics.Arcade.Sprite {
     //Constructeur de Wall
     constructor (scene, x, y) {
         //On appelle le constructeur parent avec super
-        super(scene, x, y, 'player');
+        super(scene, x, y, 'hero');
         this._speed = 160;
         this._jumpSpeed = 200;
 
@@ -20,10 +20,10 @@ class Hero extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         //On initialise ces paramètre de creation
-        this.setTexture(texture)
-        this.setDisplaySize(20, 100)
-        this.body.setAllowGravity(false)
-        this.setImmovable(true);
-        this.setOrigin(0, 0)
+        this.body.collideWorldBounds = true;
+        this.body.setBounce(0.2);
+        this.label = this.BALL;
+        this.body.onCollide = true
+        this.setScale(2);
     }
 }
