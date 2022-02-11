@@ -11,32 +11,16 @@ class Scene extends Phaser.Scene {
 
         this.physics.world.setBounds(10, 10, game.config.width - 20, game.config.height - 20,);
 
-        this.boxes = this.physics.add.group({
+        /*this.boxes = this.physics.add.group({
             collideWorldBounds: true,
             allowGravity: false,
             immovable: true,
             onCollide: true
-        })
+        })*/
 
         this.hero = new Hero(this, 100, 400);
-
-        /*this.hero = this.add.rectangle(100, 400, 20, 20, 0x6666ff);
-        this.physics.add.existing(this.hero);
-        this.hero.body.collideWorldBounds = true;
-        this.hero.body.setBounce(0.2);
-        this.hero.label = this.BALL;
-        this.hero.body.onCollide = true*/
-
-        /*for (let i = 0; i <= 15; i++) {
-            let posX = Phaser.Math.Between(0, game.config.width);
-            let posY = Phaser.Math.Between(0, game.config.height);
-            let width = Phaser.Math.Between(50, 200);
-            let height = Phaser.Math.Between(50, 200);
-            let rect = this.add.rectangle(posX, posY, width, height, 0x6666ff, {isStatic: true});
-            rect.label = this.WALL;
-            this.boxes.add(rect)
-        }*/
-        let rect = this.add.rectangle(0, 800, 200, 100, 0x6666ff, {isStatic: true}).setOrigin(0,0);
+        this.level = new Level1(this, 0, 0);
+        /*let rect = this.add.rectangle(0, 800, 200, 100, 0x6666ff, {isStatic: true}).setOrigin(0,0);
         rect.label = this.WALL;
         this.boxes.add(rect);
         let rect3 = this.add.rectangle(600, 800, 200, 100, 0x6666ff, {isStatic: true}).setOrigin(0,0);
@@ -45,11 +29,11 @@ class Scene extends Phaser.Scene {
 
         let rect2 = this.add.rectangle(400, 0, 400, 100, 0x6666ff, {isStatic: true});
         rect2.label = this.WALL;
-        this.boxes.add(rect2)
+        this.boxes.add(rect2)*/
 
 
 
-        this.physics.add.collider(this.hero, this.boxes)
+        //this.physics.add.collider(this.hero, this.boxes)
 
         this.test = "NIQUE TA GROSSE MERE"
         this.hook = null;
@@ -101,6 +85,12 @@ class Scene extends Phaser.Scene {
             }
 
         }, this)
+
+        this.input.keyboard.on('keydown-A', function () {
+            if(me.grappling===false){
+                me.hero.body.setAllowGravity(true)
+            }
+        });
     }
 
     fireHook(e) {
